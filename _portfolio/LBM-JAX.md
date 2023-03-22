@@ -1,13 +1,13 @@
 ---
 title: "Simulating Fluids with Lattice Boltzmann Method with GPU support using JAX "
-excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed type='text/html' src='LBM-JAX/rayleigh.html' height='210'>"
+excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed type='text/html' src='LBM-JAX/rayleigh-benard.html' height='210'>"
 collection: portfolio
 ---
 
 Project source code can be found on [Github](https://github.com/hlasco/rllbm)
 <figure style="display: flex; flex-direction: row; justify-content: space-between; overflow: hidden;">
   <h3> Rayleigh-Taylor instability triggered by oscillating heat source </h3>
-  <embed type="text/html" src="rayleigh.html" height="210">
+  <embed type="text/html" src="rayleigh-benard.html" height="210">
   <figcaption style="text-align: left;">This visualization shows the Rayleigh-Taylor instability in action, triggered by a local heating of the left wall of a box. The heated fluid is less dense and rises, while the colder, denser fluid sinks, creating a mixing layer that grows over time due to the gravitational force. The heat source moves periodically, and its amplitude oscillates between positive and negative values, causing the mixing layer to develop different shapes and structures. The simulation demonstrates the complex and dynamic behavior of the Rayleigh-Taylor instability</figcaption>
 </figure>
 
