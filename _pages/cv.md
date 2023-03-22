@@ -8,4 +8,9 @@ redirect_from:
 ---
 
 {% include base_path %}
-<embed src="../files/Hugues_deLaroussilheResume.pdf" width="800px" height="1000px" />
+
+<object data="../files/Hugues_deLaroussilheResume.pdf" type="application/pdf" width="80%" height="100%"> 
+  <p>It appears you don't have a PDF plugin for this browser.
+   You can <a href="../files/Hugues_deLaroussilheResume.pdf">click here to
+  download the PDF file.</a></p>  
+</object>

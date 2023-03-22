@@ -1,14 +1,24 @@
 ---
 title: "Simulating Fluids with Lattice Boltzmann Method with GPU support using JAX "
-excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed type='text/html' src='LBM-JAX/rayleigh-benard.html' height='210'>"
+excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed src='LBM-JAX/rayleigh-benard.html' width='100%' height='550'>"
 collection: portfolio
 ---
 
 Project source code can be found on [Github](https://github.com/hlasco/rllbm)
-<figure style="display: flex; flex-direction: row; justify-content: space-between; overflow: hidden;">
+
+
+<figure>
   <h3> Rayleigh-Taylor instability triggered by oscillating heat source </h3>
-  <embed type="text/html" src="rayleigh-benard.html" height="210">
-  <figcaption style="text-align: left;">This visualization shows the Rayleigh-Taylor instability in action, triggered by a local heating of the left wall of a box. The heated fluid is less dense and rises, while the colder, denser fluid sinks, creating a mixing layer that grows over time due to the gravitational force. The heat source moves periodically, and its amplitude oscillates between positive and negative values, causing the mixing layer to develop different shapes and structures. The simulation demonstrates the complex and dynamic behavior of the Rayleigh-Taylor instability</figcaption>
+  <iframe src='rayleigh-benard.html'
+    sandbox='allow-same-origin allow-scripts'
+    seamless='seamless'
+    frameborder='0'
+    width='100%'
+    height='550'
+    >
+  </iframe>
+  <figcaption style="text-align: left;">This visualization shows the Rayleigh-Taylor instability in action, triggered by a local heating of the left wall of a box. The heated fluid is less dense and rises, while the colder, denser fluid sinks, creating a mixing layer that grows over time due to the gravitational force. The heat source moves periodically, and its amplitude oscillates between positive and negative values, causing the mixing layer to develop different shapes and structures. The simulation demonstrates the complex and dynamic behavior of the Rayleigh-Taylor instability
+  </figcaption>
 </figure>
 
 Computational fluid dynamics (CFD) is an important field of study that has applications in many areas, including engineering, physics, and chemistry. One of the popular techniques to simulate fluids is the Lattice Boltzmann Method (LBM). This method involves simulating the motion of fluid particles using statistical mechanics principles.
