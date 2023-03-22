@@ -1,8 +1,15 @@
 ---
 title: "Simulating Fluids with Lattice Boltzmann Method with GPU support using JAX "
-excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed type='text/html' src='LBM-JAX/rayleigh.html' width='550' height='300'>"
+excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed type='text/html' src='LBM-JAX/rayleigh.html' height='210'>"
 collection: portfolio
 ---
+
+Project source code can be found on [Github](https://github.com/hlasco/rllbm)
+<figure style="display: flex; flex-direction: row; justify-content: space-between; overflow: hidden;">
+  <h3> Rayleigh-Taylor instability triggered by oscillating heat source </h3>
+  <embed type="text/html" src="rayleigh.html" height="210">
+  <figcaption style="text-align: left;">This visualization shows the Rayleigh-Taylor instability in action, triggered by a local heating of the left wall of a box. The heated fluid is less dense and rises, while the colder, denser fluid sinks, creating a mixing layer that grows over time due to the gravitational force. The heat source moves periodically, and its amplitude oscillates between positive and negative values, causing the mixing layer to develop different shapes and structures. The simulation demonstrates the complex and dynamic behavior of the Rayleigh-Taylor instability</figcaption>
+</figure>
 
 Computational fluid dynamics (CFD) is an important field of study that has applications in many areas, including engineering, physics, and chemistry. One of the popular techniques to simulate fluids is the Lattice Boltzmann Method (LBM). This method involves simulating the motion of fluid particles using statistical mechanics principles.
 
@@ -17,33 +24,4 @@ When it comes to implementing a LBM code, I've found that JAX is an excellent ch
 Lattice Boltzmann Method
 ======
 
-The LBM simulates fluid dynamics by breaking up the fluid into a set of "particles" and tracking their positions and velocities through a lattice over time. The positions and velocities of the particles are updated at each point in the lattice according to a set of rules based on the Boltzmann equation, which describes the statistical behavior of particles in a gas or fluid. The fluid is modeled using a distribution function that tells us how many particles of fluid are moving in a certain direction at a certain point in space. We use this function to simulate the movement of fluids by updating the distribution function at each point in the lattice over time. By updating the distribution function, we can simulate how the fluid flows and behaves in different situations. Essentially, the distribution function is a way to keep track of how much fluid is moving in which direction at each point in space.
-
-
-The distribution function for a fluid particle with velocity $\mathbf{v}$ and position $\mathbf{x}$ at time $t$ is denoted by $f(\mathbf{x}, \mathbf{v}, t)$.
-
-The Lattice Boltzmann Method equations are:
-
-$$\begin{align*}
-f_i(\mathbf{x} + \mathbf{v}_i\Delta t, t+\Delta t) - f_i(\mathbf{x}, t) = -\frac{\Delta t}{\tau}(f_i(\mathbf{x}, t) - f_i^{eq}(\mathbf{x}, t)) + \Delta t F_i(\mathbf{x}, t) \\
-f_i^{eq}(\mathbf{x}, t) = w_i \rho(\mathbf{x}, t) \left[1 + \frac{\mathbf{v}_i \cdot \mathbf{u}(\mathbf{x}, t)}{c_s^2} + \frac{(\mathbf{v}_i \cdot \mathbf{u}(\mathbf{x}, t))^2}{2c_s^4} - \frac{|\mathbf{u}(\mathbf{x}, t)|^2}{2c_s^2}\right]
-\end{align*}$$
-
-where:
-- $f_i(\mathbf{x}, t)$ is the distribution function for the $i$-th velocity direction at position $\mathbf{x}$ and time $t$.
-- $\Delta t$ is the time step.
-- $\tau$ is the relaxation time, which controls the viscosity of the fluid.
-- $F_i(\mathbf{x}, t)$ is the force acting on the fluid particle with velocity $\mathbf{v}_i$ at position $\mathbf{x}$ and time $t$.
-- $w_i$ is the weight associated with the $i$-th velocity direction.
-- $\rho(\mathbf{x}, t)$ is the density of the fluid at position $\mathbf{x}$ and time $t$.
-- $\mathbf{u}(\mathbf{x}, t)$ is the macroscopic velocity of the fluid at position $\mathbf{x}$ and time $t$.
-- $c_s$ is the speed of sound, which is related to the lattice spacing and time step.
-- $f_i^{eq}(\mathbf{x}, t)$ is the equilibrium distribution function for the $i$-th velocity direction at position $\mathbf{x}$ and time $t$.
-
-The equilibrium distribution function is calculated using the density and velocity of the fluid at each lattice point, and depends on the specific lattice used in the simulation.
-
-<figure style="display: flex; flex-direction: row; justify-content: space-between; overflow: hidden;">
-  <h2>The Rayleigh Benard Instability</h2>
-  <embed type="text/html" src="rayleigh.html" height="220">
-  <figcaption style="text-align: right;">Caption for the visualization goes here.</figcaption>
-</figure>
+The LBM simulates fluid dynamics by breaking up the fluid into a set of "particles" and tracking their positions and velocities through a lattice over time. The positions and velocities of the particles are updated at each point in the lattice according to a set of rules based on the Boltzmann equation, which describes the statistical behavior of particles in a gas or fluid. The fluid is modeled using a distribution function that tells us how many particles of fluid are moving in a certain direction at a certain point in space. By updating the distribution function, we can simulate how the fluid flows and behaves in different situations.
