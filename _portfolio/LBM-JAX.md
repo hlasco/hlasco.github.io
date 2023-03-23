@@ -1,22 +1,17 @@
 ---
 title: "Simulating Fluids with Lattice Boltzmann Method with GPU support using JAX "
-excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><embed src='LBM-JAX/rayleigh-benard.html' width='100%' height='550'>"
+excerpt: "A Python fluid dynamics solver based on the Lattice Boltzmann Method using JAX as its computational backend.<br/><video src='LBM-JAX/rayleigh-benard.mp4' width='60%' controls></video>"
 collection: portfolio
 ---
 
 Project source code can be found on [Github](https://github.com/hlasco/rllbm)
 
 
+
+
 <figure>
   <h3> Rayleigh-Taylor instability triggered by oscillating heat source </h3>
-  <iframe src='rayleigh-benard.html'
-    sandbox='allow-same-origin allow-scripts'
-    seamless='seamless'
-    frameborder='0'
-    width='100%'
-    height='550'
-    >
-  </iframe>
+  <video src='rayleigh-benard.mp4' width='80%' controls></video>
   <figcaption style="text-align: left;">This visualization shows the Rayleigh-Taylor instability in action, triggered by a local heating of the left wall of a box. The heated fluid is less dense and rises, while the colder, denser fluid sinks, creating a mixing layer that grows over time due to the gravitational force. The heat source moves periodically, and its amplitude oscillates between positive and negative values, causing the mixing layer to develop different shapes and structures. The simulation demonstrates the complex and dynamic behavior of the Rayleigh-Taylor instability
   </figcaption>
 </figure>
@@ -34,4 +29,32 @@ When it comes to implementing a LBM code, I've found that JAX is an excellent ch
 Lattice Boltzmann Method
 ======
 
-The LBM simulates fluid dynamics by breaking up the fluid into a set of "particles" and tracking their positions and velocities through a lattice over time. The positions and velocities of the particles are updated at each point in the lattice according to a set of rules based on the Boltzmann equation, which describes the statistical behavior of particles in a gas or fluid. The fluid is modeled using a distribution function that tells us how many particles of fluid are moving in a certain direction at a certain point in space. By updating the distribution function, we can simulate how the fluid flows and behaves in different situations.
+The LBM is a numerical method for simulating fluid dynamics. In LBM, the fluid is represented as a set of "particles" moving through a lattice. The positions and velocities of the particles are updated at each point in the lattice according to a set of rules based on the Boltzmann equation.
+
+The Boltzmann equation describes the statistical behavior of particles in a gas or fluid. It can be written as:
+
+$$\frac{\partial f}{\partial t} + \mathbf{u} \cdot \nabla f = \Omega$$
+
+
+where $f(\mathbf{u}, \mathbf{x}, t)$ is the distribution function, which tells us how many particles of fluid are moving with a certain velocity $\mathbf{u}$ at a certain point in space $\mathbf{x}$ and time $t$. $\nabla$ is the gradient operator, and $\Omega$ represents the collision term, which describes the interactions between the particles.
+
+To simulate the fluid dynamics using LBM, we first discretize the Boltzmann equation in both space and time. We then define a lattice, which is a regular grid of points in space. At each lattice point, we define a set of discrete velocities $\mathbf{e}_i$, where $i$ ranges over a set of discrete values. These discrete velocities correspond to the possible directions that particles can move in the lattice.
+
+
+<figure style="display: inline-block; width: 80%">
+  <img src="lattice.png" width="40%" height="auto">
+  <figcaption>The discrete velocities in the D2Q9 and D2Q5 lattices.</figcaption>
+</figure>
+
+
+Next, we define a set of particle distribution functions $f_i(\mathbf{x},t)$, where $\mathbf{x}$ is the position in the lattice and $t$ is time. Each distribution function $f_i(\mathbf{x},t)$ represents the number of particles moving in the direction $\mathbf{e}_i$ at the lattice point $\mathbf{x}$ and time $t$.
+
+The evolution of the distribution functions is governed by the following equation:
+
+$$f_i(\mathbf{x}+\mathbf{e}_i\Delta t,t+\Delta t) = f_i(\mathbf{x},t) - \frac{1}{\tau}\left[f_i(\mathbf{x},t) - f_i^{eq}(\mathbf{x},t)\right]$$
+
+where $\Delta t$ is the time step, $\tau$ is a relaxation time that determines the rate at which the distribution functions approach their equilibrium values, and $f_i^{eq}(\mathbf{x},t)$ is the local equilibrium distribution function, which is given by:
+
+$$f_i^{eq}(\mathbf{x},t) = w_i \rho(\mathbf{x},t)\left[1 + \frac{\mathbf{e}_i \cdot \mathbf{u}(\mathbf{x},t)}{c_s^2} + \frac{(\mathbf{e}_i \cdot \mathbf{u}(\mathbf{x},t))^2}{2c_s^4} - \frac{\mathbf{u}(\mathbf{x},t) \cdot \mathbf{u}(\mathbf{x},t)}{2c_s^2}\right]$$
+
+where $w_i$ are weights that depend on the discrete velocity $\mathbf{e}_i$, $\rho(\mathbf{x},t)$ is the local density, $\mathbf{u}(\mathbf{x},t)$ is the local velocity, and $c_s$ is the speed of sound, which is a parameter that depends on the specific fluid being simulated.
